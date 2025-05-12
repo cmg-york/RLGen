@@ -9,6 +9,10 @@ Created on Mon Sep 19 11:22:43 2022
 
 import unittest
 
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 import scripts.GMEnv as sim
 import scripts.Tester as test
 
@@ -16,7 +20,7 @@ import scripts.Tester as test
 class TestSum(unittest.TestCase):
     
     def setUp(self):
-        self.env = sim.GMEnv("../../examples/discrete/1Order.pl")
+        self.env = sim.GMEnv("./examples/discrete/1Order.pl")
         self.env.setDebug(False)
         self.env.setSeed(123)
         self.t = test.TestIt(self.env)

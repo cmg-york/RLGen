@@ -4,7 +4,9 @@ Created on Mon Sep 19 11:22:43 2022
 
 @author: Anonymous
 """
-
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 import scripts.GMEnv as sim
 import scripts.Tester as test

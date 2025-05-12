@@ -6,19 +6,24 @@ Created on Tue Jan 31 11:39:07 2023
 """
 
 from pyswip import Prolog
-from scripts.QE.QMI import QMI
+from .QMI import QMI
 
 class QueryEngine(QMI):
     
     
     def __init__(self,file):
         self.prolog = Prolog()
+        # First load the interface file
+        self.prolog.consult("./scripts/QE/DT-Golog-Iface.pl")
+        # Then load the domain file
         self.prolog.consult(file)
         
     def setFile(self,file):
         """
         [Refer to QMI function documentation.]
         """
+        # When setting a new file, we need to reload both files
+        self.prolog.consult("./scripts/QE/DT-Golog-Iface.pl")
         self.prolog.consult(file)
         
     def possibleAt(self,t, eH):

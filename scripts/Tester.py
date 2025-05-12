@@ -35,7 +35,7 @@ class TestIt():
         self.env.closeQE()
 
     def performAction(self,action,choice = -1):
-        n_state, reward, done, info = self.env.step(action, choice)
+        n_state, reward, terminated, truncated, info = self.env.step(action, choice)
         self.score += reward
         
         if self.debug:
@@ -47,7 +47,7 @@ class TestIt():
             print('--> Reward: {}'.format(reward))
             print('--> Cum. Reward: {}'.format(self.score))
         
-        return(n_state,reward,self.score,done,info)
+        return n_state,reward,self.score, terminated or truncated,info
 
         
     def simulate(self,episodes,policy = [],debug = False, forgivePenalty = True):
@@ -83,7 +83,8 @@ class TestIt():
                     # Executing given policy
                     
                     
-                n_state, reward, done, info = self.env.step(action)
+                n_state, reward, terminated, truncated, info = self.env.step(action)
+                done = terminated or truncated
                 if (reward != self.env.getInfeasiblePenalty()) or (not forgivePenalty):
                     self.score += reward
                 

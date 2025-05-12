@@ -1,4 +1,4 @@
-gym==0.21.0
-numpy==2.0.2
-pyswip==0.3.0
-stable-baselines3==1.5.0
+gym==0.26.2
+numpy==2.0
+pyswip==0.3.2
+stable-baselines3==2.6.0

@@ -1,0 +1,14 @@
+{
+    "simRandomIter": 100,
+    "simCustomIter": 100,
+    "simOptimalIter": 100,
+    "testingIter": 1000,
+    "trainingIter": 1000,
+    "learningAlgorithm": "PPO",
+    "learningLoggingInterval": 500,
+    "seed": 123,
+    "debug": false,
+    "forgivePenalty": true,
+    "optimalSimParams": [0, 2],
+    "multiRunSimParams": [0, 2, 0, 2]
+} 

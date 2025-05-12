@@ -5,10 +5,10 @@ Created on Fri Jun  3 14:55:13 2022
 @author: Anonymous
 """
 
-from gym import Env
-from gym.spaces import Discrete, Box
+from gymnasium import Env
+from gymnasium.spaces import Discrete, Box
 import numpy as np
-from scripts.QE.QueryEngine import QueryEngine
+from .QE.QueryEngine import QueryEngine
 
 class GMEnv(Env):
 
@@ -105,7 +105,7 @@ class GMEnv(Env):
             self.obsMins = -1
             self.obsMaxs = -1
         
-    def reset(self):
+    def reset(self, seed=None, options=None):
         # Reset the episode
         self.eH = [[]];
         self.tH = [[]];
@@ -120,7 +120,7 @@ class GMEnv(Env):
         else:
             newState = self.qmi.getConState(self.eHString())
         
-        return (newState)
+        return newState, {}
 
     def possible(self,action):
         # If the episode is done, accept no more actions
@@ -181,6 +181,8 @@ class GMEnv(Env):
         #else:
         #    newState = self.qmi.getConState(self.eHString())
 
+        terminated = self.done()
+        truncated = False
 
         inf = {"stAction":stAction,
                "bitState":self.bitState,
@@ -208,7 +210,7 @@ class GMEnv(Env):
             print('--> TransState: {}'.format(inf['TransState']))
             #print("--> Initial state {}".format(self.initBitState))
         
-        return newState, self.reward, self.done(), inf
+        return newState, self.reward, terminated, truncated, inf
 
     def done(self):
         assert(self.run <= self.runsNum)
